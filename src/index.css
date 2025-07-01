@@ -15,7 +15,6 @@
 ::-webkit-scrollbar {
   width: 10px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
   background: white;
@@ -73,24 +72,24 @@
     display: none; /* For Chrome, Safari, and Edge */
   }
 
-  .btn-white  { 
-    @apply  medium-14 bg-white text-tertiary px-7 py-3 rounded-lg
+  .btn-white {
+    @apply medium-14 bg-white text-tertiary px-7 py-3 rounded-lg;
   }
 
-  .btn-dark  { 
-    @apply  medium-14 bg-tertiary text-white px-7 py-3 rounded-lg
-  }
-  
-  .btn-light  { 
-    @apply  medium-14 bg-primary border border-slate-900/5 px-7 py-3 rounded-lg hover:bg-white transition-all duration-300
+  .btn-dark {
+    @apply medium-14 bg-tertiary text-white px-7 py-3 rounded-lg;
   }
 
-  .btn-outline  { 
-    @apply  medium-14 bg-white border border-slate-900/5 px-7 py-3 rounded-lg hover:bg-primary transition-all duration-300
+  .btn-light {
+    @apply medium-14 bg-primary border border-slate-900/5 px-7 py-3 rounded-lg hover:bg-white transition-all duration-300;
   }
 
-  .btn-secondary  { 
-    @apply  medium-14 bg-secondary text-white px-7 py-3 rounded-lg transition-all  
+  .btn-outline {
+    @apply medium-14 bg-white border border-slate-900/5 px-7 py-3 rounded-lg hover:bg-primary transition-all duration-300;
+  }
+
+  .btn-secondary {
+    @apply medium-14 bg-secondary text-white px-7 py-3 rounded-lg transition-all;
   }
 
   .max-padd-container {

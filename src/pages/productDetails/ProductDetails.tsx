@@ -1,48 +1,43 @@
-
+import { useParams } from 'react-router-dom';
+import SellerAndDelivery from '../../components/ProductDetails/SellerAndDelivery';
+import Loading from '../../components/ui/Loading';
+import Breadcrumb from '../../components/ui/navbar/Breadcrumb';
 import { useSingleProductQuery } from '../../redux/features/product/getSingleProductApi';
+import Description from './Description';
 import ProductData from './ProductData';
+import Specifications from './Specifications';
 
 const ProductDetails = () => {
-    const {data} = useSingleProductQuery(undefined)
- 
+  const params = useParams();
+  const { data, isLoading } = useSingleProductQuery(params.slug)
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <div className="flex flex-col lg:flex-row gap-6 p-6 font-sans max-w-7xl mx-auto">
-
-
-      {/* Details Section */}
-      <ProductData productData={data?.data}/>
-
-      {/* Seller & Delivery Section */}
-      <div className="w-full lg:w-80 space-y-4">
-        <div className="border p-4 rounded">
-          <div className="text-gray-700 font-semibold mb-2">Delivery Options</div>
-          <div className="text-sm">
-            <div className="text-green-600">Regular</div>
-            <div className="text-gray-500">Delivery within 2-3 days</div>
-            <div className="text-gray-400 mt-1">Express <span className="text-red-500 ml-1">Not Available</span></div>
-            <div className="text-gray-400 text-xs">Delivery within 24 Hours.</div>
-          </div>
+    <>
+      <Breadcrumb />
+      <div className="flex flex-col lg:flex-row gap-10 md:gap-16 lg:gap-28 sm:px-6 md:px-10 py-6 font-sans max-w-7xl mx-auto px-4 ">
+        {/* Details Section */}
+        <div className="w-full lg:w-2/3">
+          <ProductData productData={data?.data} />
         </div>
 
-        <div className="border p-4 rounded">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex items-center gap-2">
-              <img src="/pg.png" alt="P&G" className="w-6 h-6" />
-              <span className="text-gray-700 font-semibold">BD FASHION HOUSE</span>
-            </div>
-            <span className="bg-purple-500 text-white text-xs px-2 py-1 rounded">Rising Star</span>
-          </div>
-          <button className="bg-green-100 text-green-700 text-sm px-3 py-1 rounded w-full">Chat Now</button>
-          <button className="text-sm text-blue-500 mt-1 w-full">View Shop</button>
-
-          <div className="flex justify-between text-xs text-gray-600 mt-2">
-            <div>Ship on Time <div className="font-semibold text-black">100%</div></div>
-            <div>Chat Response <div className="font-semibold text-black">90%</div></div>
-            <div>Shop Rating <div className="font-semibold text-black">99.8%</div></div>
-          </div>
+        {/* Seller & Delivery Section */}
+        <div className="w-full lg:w-1/3">
+          <SellerAndDelivery shopName={data?.data?.merchant?.shop_name} />
         </div>
       </div>
-    </div>
+
+      <div className='bg-[#F1F5F9] pt-4 pb-16 space-y-3 px-4'>
+        {/* description */}
+        <Description desc={data?.data?.description} />
+
+        {/* Specifications Section */}
+        <Specifications productData={data?.data} />
+      </div>
+    </>
   );
 };
 

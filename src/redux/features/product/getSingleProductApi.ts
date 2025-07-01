@@ -3,8 +3,8 @@ import { baseApi } from "../../api/baseApi";
 const getSingleProductApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     singleProduct: builder.query({
-      query: () => ({
-        url: "/product/iphone-15-plus",
+      query: (slug) => ({
+        url: `/product/${slug}`,
         method: "GET",
       }),
     }),

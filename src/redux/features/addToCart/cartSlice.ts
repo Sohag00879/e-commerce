@@ -1,17 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface CartItem {
-  _id: string;
+  id: number | string; // Changed to allow string IDs
+  thumbnail: string;
   name: string;
-  description: string;
-  price: number;
-  image: string[]; // array of image URLs or paths
-  category: string;
-  subCategory: string;
-  sizes: string[]; // array of available sizes
-  date: number; // timestamp
-  popular: boolean;
+  color?: string;
+  size?: string;
   quantity: number;
+  price: number;
+  discountPrice: number;
+  shopName: string;
+  shippingFee?: string;
 }
 
 interface CartState {
@@ -28,7 +27,7 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action: PayloadAction<CartItem>) {
       const item = action.payload;
-      const existingItem = state.cartItems.find((i) => i._id === item._id);
+      const existingItem = state.cartItems.find((i) => i.id === item.id);
 
       if (existingItem) {
         existingItem.quantity += item.quantity || 1;
@@ -40,21 +39,21 @@ const cartSlice = createSlice({
       }
     },
     incrementQuantity: (state, action) => {
-      const item = state.cartItems.find((item) => item._id === action.payload);
+      const item = state.cartItems.find((item) => item.id === action.payload);
       if (item) {
         item.quantity += 1;
       }
     },
 
     decrementQuantity: (state, action) => {
-      const item = state.cartItems.find((item) => item._id === action.payload);
+      const item = state.cartItems.find((item) => item.id === action.payload);
       if (item && item.quantity > 1) {
         item.quantity -= 1;
       }
     },
 
-    removeFromCart(state, action: PayloadAction<string>) {
-      state.cartItems = state.cartItems.filter((i) => i._id !== action.payload);
+    removeFromCart(state, action: PayloadAction<string | number>) {
+      state.cartItems = state.cartItems.filter((i) => i.id !== action.payload);
     },
     clearCart(state) {
       state.cartItems = [];

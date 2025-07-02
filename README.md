@@ -50,6 +50,9 @@ A responsive and modern eCommerce web application built using **React**, **TypeS
 
 bash
 git clone https://github.com/Sohag00879/e-commerce.git
+
 cd e-commerce
+
 npm install
+
 npm run dev
